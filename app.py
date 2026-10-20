@@ -9,12 +9,12 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
 # ==============================================================================
-# 1. CẤU HÌNH TRANG MOBILE-FIRST (ẨN HOÀN TOÀN SIDEBAR)
+# 1. CẤU HÌNH TRANG MOBILE GỌN GÀNG (KHÔNG SIDEBAR, BẤM LÀ CHẠY NGAY)
 # ==============================================================================
 st.set_page_config(
-    page_title="App Thi Đua 8B3",
-    page_icon="📱",
-    layout="centered", # Gọn gàng như màn hình điện thoại
+    page_title="Lớp 8B3 Vươn Mình Thế Giới",
+    page_icon="🌟",
+    layout="centered",
     initial_sidebar_state="collapsed",
 )
 
@@ -22,66 +22,65 @@ API_URL = "https://script.google.com/macros/s/AKfycbwoy6GT8XEkwwrLTSXrIk3tMj6lzA
 DATA_FILE = "du_lieu_thi_dua.csv"
 
 # ==============================================================================
-# 2. CSS BIẾN WEB THÀNH APP MOBILE CHUYÊN NGHIỆP
+# 2. BỘ CSS CHUẨN GIAO DIỆN APP MOBILE
 # ==============================================================================
 st.markdown(
     """
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700;800&display=swap');
         html, body, [class*="css"] {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
-        /* Ẩn hoàn toàn thanh Sidebar và nút mở Sidebar mặc định */
+        /* Ẩn hoàn toàn sidebar */
         section[data-testid="stSidebar"], [data-testid="collapsedControl"] {
             display: none !important;
         }
 
-        /* Chừa khoảng trống dưới đáy cho thanh menu cố định */
         .block-container {
             padding-top: 1rem !important;
             padding-bottom: 5.5rem !important;
-            max-width: 650px !important; /* Độ rộng chuẩn màn hình Mobile / Tablet */
+            max-width: 600px !important;
         }
 
-        /* Header App Mobile màu xanh gradient */
-        .mobile-header {
+        /* Header trên cùng */
+        .app-topbar-m {
             background: linear-gradient(135deg, #0b4f8a 0%, #1976d2 100%);
             color: #ffffff;
-            padding: 16px 20px;
+            text-align: center;
+            padding: 18px 14px;
             border-radius: 16px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             box-shadow: 0 4px 14px rgba(11, 79, 138, 0.25);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
-        .mobile-header-title {
-            font-size: 1.2rem;
+        .app-title-m {
+            font-size: 1.25rem;
             font-weight: 800;
             letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
-        .mobile-header-sub {
+        .app-sub-m {
             font-size: 0.8rem;
-            color: #ffeb3b;
+            color: #fde047;
             font-weight: 600;
+            margin-top: 2px;
         }
 
-        /* Thẻ học sinh bo cong dạng Card Mobile */
-        .student-mobile-card {
+        /* Thẻ học sinh */
+        .student-m-card {
             background: #ffffff;
             border-radius: 14px;
-            padding: 14px 18px;
-            margin-bottom: 12px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 2px 6px rgba(0,0,0,0.03);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .student-mobile-avatar {
-            width: 44px;
-            height: 44px;
+        .student-m-avatar {
+            width: 42px;
+            height: 42px;
             background: #e0f2fe;
             color: #0284c7;
             border-radius: 50%;
@@ -93,58 +92,40 @@ st.markdown(
             margin-right: 12px;
         }
 
-        /* Thẻ thống kê 2 cột */
-        .stat-grid {
+        /* Thẻ thống kê */
+        .stat-grid-m {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 16px;
         }
-        .stat-card-m {
+        .stat-box-m {
             background: #ffffff;
             border-radius: 14px;
             padding: 14px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
             text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
         }
-        .stat-card-m-title {
+        .stat-box-label {
             font-size: 0.75rem;
             color: #64748b;
-            text-transform: uppercase;
             font-weight: 700;
+            text-transform: uppercase;
         }
-        .stat-card-m-val {
+        .stat-box-val {
             font-size: 1.6rem;
             font-weight: 800;
             color: #0f172a;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
-        /* Nút bấm bo tròn mượt mà */
+        /* Nút bấm */
         .stButton>button {
             border-radius: 10px;
             font-weight: 700;
-            padding: 8px 16px;
-            transition: all 0.2s ease;
-        }
-
-        /* Thanh điều hướng cố định dưới đáy màn hình (Bottom Navigation Bar) */
-        .bottom-nav-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #ffffff;
-            border-top: 1px solid #e2e8f0;
             padding: 8px 12px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-            z-index: 999999;
-            max-width: 650px;
-            margin: 0 auto;
+            transition: all 0.2s ease;
         }
     </style>
     """,
@@ -152,7 +133,7 @@ st.markdown(
 )
 
 # ==============================================================================
-# 3. DANH MỤC THI ĐUA & DỮ LIỆU
+# 3. DANH MỤC THI ĐUA & DỮ LIỆU KHỞI TẠO
 # ==============================================================================
 DANH_SACH_LOI = {
     "🌸 Thầy cô tuyên dương (+2)": 2,
@@ -216,42 +197,9 @@ def tinh_xep_loai(diem):
     else:
         return "Yếu"
 
-def parse_item_info(item_str):
-    diem_goc = 0
-    matched_loi = list(DANH_SACH_LOI.keys())[0]
-    so_lan = 1
-    ghi_chu = ""
-
-    if "[" in item_str and "]" in item_str:
-        ghi_chu = item_str[item_str.find("[") + 1 : item_str.rfind("]")].strip()
-    elif "(" in item_str and ")" in item_str and not any(k in item_str for k in ["(+", "(-"]):
-        ghi_chu = item_str[item_str.find("(") + 1 : item_str.rfind(")")].strip()
-
-    for ten_loi, diem in DANH_SACH_LOI.items():
-        ten_ngan = ten_loi.split(" (")[0]
-        if item_str.startswith(ten_ngan):
-            matched_loi = ten_loi
-            diem_goc = diem
-            if " x" in item_str:
-                try:
-                    so_lan = int(item_str.split(" x")[1].split(" ")[0].split("[")[0].split("(")[0])
-                except Exception:
-                    so_lan = 1
-            break
-
-    total_delta = diem_goc * so_lan
-    return matched_loi, so_lan, ghi_chu, total_delta
-
 def clean_dataframe(df_input):
     if df_input is None or df_input.empty:
         return pd.DataFrame(DEFAULT_STUDENTS)
-
-    col_found_loi = None
-    for col in df_input.columns:
-        c_low = str(col).strip().lower()
-        if any(k in c_low for k in ["lỗi", "vi phạm", "ghi chú", "tuyên dương", "chi tiết", "nội dung", "log"]):
-            col_found_loi = col
-            break
 
     rename_dict = {}
     for col in df_input.columns:
@@ -264,12 +212,11 @@ def clean_dataframe(df_input):
             rename_dict[col] = "Điểm thi đua"
         elif c_low in ["xếp loại", "xep loai", "loại"]:
             rename_dict[col] = "Xếp loại"
+        elif any(k in c_low for k in ["lỗi", "vi phạm", "ghi chú", "tuyên dương", "chi tiết", "nội dung"]):
+            rename_dict[col] = "Lỗi vi phạm"
 
     if rename_dict:
         df_input = df_input.rename(columns=rename_dict)
-
-    if col_found_loi and col_found_loi in df_input.columns and col_found_loi != "Lỗi vi phạm":
-        df_input["Lỗi vi phạm"] = df_input[col_found_loi]
 
     if "Lỗi vi phạm" not in df_input.columns:
         if len(df_input.columns) >= 6:
@@ -279,17 +226,10 @@ def clean_dataframe(df_input):
 
     df_clean = df_input.dropna(subset=["Họ và tên"]).copy()
     df_clean["Họ và tên"] = df_clean["Họ và tên"].astype(str).str.strip()
-    df_clean = df_clean[~df_clean["Họ và tên"].str.lower().isin(["nan", "none", ""])]
-
     df_clean["Tổ"] = df_clean["Tổ"].fillna("Tổ 1").astype(str).str.strip()
-    df_clean["Điểm thi đua"] = (
-        pd.to_numeric(df_clean["Điểm thi đua"], errors="coerce").fillna(100).astype(int)
-    )
+    df_clean["Điểm thi đua"] = pd.to_numeric(df_clean["Điểm thi đua"], errors="coerce").fillna(100).astype(int)
     df_clean["Xếp loại"] = df_clean["Điểm thi đua"].apply(tinh_xep_loai)
-    
-    df_clean["Lỗi vi phạm"] = df_clean["Lỗi vi phạm"].astype(str).str.strip()
-    df_clean["Lỗi vi phạm"] = df_clean["Lỗi vi phạm"].replace(["nan", "None", "NaN", "null"], "")
-
+    df_clean["Lỗi vi phạm"] = df_clean["Lỗi vi phạm"].astype(str).str.strip().replace(["nan", "None", "NaN"], "")
     df_clean = df_clean.reset_index(drop=True)
     df_clean["STT"] = list(range(1, len(df_clean) + 1))
     return df_clean
@@ -318,7 +258,7 @@ def load_data():
 
 def update_gsheet(name, score, xeploai, log_text):
     if not API_URL or "/exec" not in API_URL:
-        return False, "Chưa thiết lập API Google Sheets"
+        return
     try:
         params = {
             "action": "update",
@@ -328,74 +268,54 @@ def update_gsheet(name, score, xeploai, log_text):
             "log": log_text,
             "_t": time.time(),
         }
-        res = requests.get(API_URL, params=params, timeout=10)
-        if res.status_code == 200:
-            res_json = res.json()
-            if res_json.get("status") == "success":
-                return True, "Thành công"
-            return False, res_json.get("message", "Lỗi dữ liệu Google Apps Script")
-        return False, f"Lỗi HTTP {res.status_code}"
-    except Exception as e:
-        return False, str(e)
-
-def reset_new_week_gsheet():
-    if not API_URL or "/exec" not in API_URL:
-        return False, "Chưa thiết lập API Google Sheets"
-    try:
-        params = {"action": "reset_week", "_t": time.time()}
-        res = requests.get(API_URL, params=params, timeout=12)
-        if res.status_code == 200:
-            res_json = res.json()
-            if res_json.get("status") == "success":
-                return True, "Thành công"
-            return False, res_json.get("message", "Lỗi reset")
-        return False, f"Lỗi HTTP {res.status_code}"
-    except Exception as e:
-        return False, str(e)
+        requests.get(API_URL, params=params, timeout=10)
+    except Exception:
+        pass
 
 if "df" not in st.session_state:
     st.session_state.df = load_data()
 
 df = st.session_state.df
 
-# Khởi tạo tab điều hướng mobile
-if "current_tab" not in st.session_state:
-    st.session_state.current_tab = "Theo dõi"
+# Khởi tạo tab hiện tại: mặc định là "Chỉnh sửa điểm các tổ"
+if "mobile_tab" not in st.session_state:
+    st.session_state.mobile_tab = "Chỉnh sửa điểm các tổ"
+
+# Số lần vi phạm/thưởng mặc định trong phiên
+if "record_times" not in st.session_state:
+    st.session_state.record_times = 1
 
 # ==============================================================================
-# 5. HEADER MOBILE & THANH CHỌN VAI TRÒ
+# 5. HEADER MOBILE: LỚP 8B3 VƯƠN MÌNH THẾ GIỚI
 # ==============================================================================
 st.markdown(
     """
-    <div class="mobile-header">
-        <div>
-            <div class="mobile-header-title">📱 LỚP 8B3 - CHÍ CÔNG</div>
-            <div class="mobile-header-sub">HỆ THỐNG THI ĐUA HỌC ĐƯỜNG</div>
-        </div>
-        <div style="font-size: 1.6rem;">🏫</div>
+    <div class="app-topbar-m">
+        <div class="app-title-m">🌟 LỚP 8B3 VƯƠN MÌNH THẾ GIỚI</div>
+        <div class="app-sub-m">TRƯỜNG THCS CHÍ CÔNG • NĂM HỌC 2026 - 2027</div>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
-# Thanh chọn vai trò nhanh đặt ngay trên màn hình chính
-top_col1, top_col2 = st.columns([1.8, 1])
-with top_col1:
+# Thanh chọn vai trò nhanh & nút làm mới
+role_c1, role_c2 = st.columns([2, 1])
+with role_c1:
     vai_tro = st.selectbox(
         "Vai trò đang làm việc:",
         ["👑 Giáo viên chủ nhiệm", "Tổ trưởng Tổ 1", "Tổ trưởng Tổ 2", "Tổ trưởng Tổ 3", "Tổ trưởng Tổ 4"],
         label_visibility="collapsed",
     )
-with top_col2:
-    if st.button("🔄 Đồng bộ", use_container_width=True):
+with role_c2:
+    if st.button("🔄 Làm mới", use_container_width=True):
         st.session_state.df = load_data()
-        st.toast("Đã đồng bộ dữ liệu mới nhất!", icon="🔄")
+        st.toast("Đã cập nhật dữ liệu mới nhất!", icon="🔄")
         time.sleep(0.5)
         st.rerun()
 
 is_gvcn = "Giáo viên" in vai_tro
 
-# Lọc theo vai trò
+# Lọc theo tổ
 if "Tổ 1" in vai_tro:
     df_role = df[df["Tổ"].astype(str).str.contains("1", na=False)].copy()
 elif "Tổ 2" in vai_tro:
@@ -407,128 +327,15 @@ elif "Tổ 4" in vai_tro:
 else:
     df_role = df.copy()
 
-st.markdown("<hr style='margin: 10px 0 16px 0; border: none; border-top: 1px solid #e2e8f0;'>", unsafe_allow_html=True)
+st.markdown("<hr style='margin: 8px 0 14px 0; border: none; border-top: 1px solid #e2e8f0;'>", unsafe_allow_html=True)
 
 # ==============================================================================
-# 6. NỘI DUNG 4 MÀN HÌNH CHÍNH THEO TAB MOBILE
+# 6. NỘI DUNG 3 TÍNH NĂNG CHÍNH DƯỚI ĐÁY
 # ==============================================================================
 
-# --- TAB 1: THEO DÕI DANH SÁCH DẠNG CARD CHẠM ---
-if st.session_state.current_tab == "Theo dõi":
-    st.markdown("##### 📋 Danh Sách Điểm Thi Đua")
-    
-    # Bộ lọc nhanh theo tổ nếu là GVCN
-    if is_gvcn:
-        selected_group = st.pills("Phân ban:", ["Tất cả", "Tổ 1", "Tổ 2", "Tổ 3", "Tổ 4"], default="Tất cả")
-        df_show = df_role.copy() if selected_group == "Tất cả" else df_role[df_role["Tổ"] == selected_group]
-    else:
-        df_show = df_role.copy()
-
-    # Hiển thị từng học sinh dạng Thẻ bo tròn mềm mại
-    for idx, row in df_show.iterrows():
-        name = row["Họ và tên"]
-        score = row["Điểm thi đua"]
-        group = row["Tổ"]
-        rank = row["Xếp loại"]
-        first_letter = name.split()[-1][0].upper()
-        
-        score_color = "#16a34a" if score >= 100 else ("#d97706" if score >= 85 else "#dc2626")
-        badge_bg = "#dcfce7" if score >= 100 else ("#fef3c7" if score >= 85 else "#fee2e2")
-
-        st.markdown(
-            f"""
-            <div class="student-mobile-card">
-                <div style="display: flex; align-items: center;">
-                    <div class="student-mobile-avatar">{first_letter}</div>
-                    <div>
-                        <div style="font-size: 1rem; font-weight: 700; color: #1e293b;">{name}</div>
-                        <div style="font-size: 0.78rem; color: #64748b;">{group} • STT #{row['STT']}</div>
-                    </div>
-                </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 1.25rem; font-weight: 800; color: {score_color};">{score} đ</div>
-                    <span style="background-color: {badge_bg}; color: {score_color}; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 20px;">
-                        {rank}
-                    </span>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-# --- TAB 2: CHẤM ĐIỂM & VI PHẠM ---
-elif st.session_state.current_tab == "Chấm điểm":
-    st.markdown(f"##### ✍️ Ghi Nhận Thi Đua ({vai_tro})")
-
-    danh_sach_hs = [
-        f"#{row['STT']} - {row['Họ và tên']} ({row['Tổ']})"
-        for _, row in df_role.iterrows()
-    ]
-
-    with st.container(border=True):
-        hs_chon_raw = st.selectbox("👤 Chọn học sinh:", danh_sach_hs if danh_sach_hs else ["(Không có học sinh)"])
-        loi_chon = st.selectbox("📋 Nội dung tuyên dương / Vi phạm:", list(DANH_SACH_LOI.keys()))
-        
-        c1, c2 = st.columns([1, 1.5])
-        with c1:
-            so_lan = st.number_input("Số lần:", min_value=1, max_value=20, value=1)
-        with c2:
-            ghi_chu = st.text_input("Ghi chú chi tiết:")
-
-        if danh_sach_hs and not hs_chon_raw.startswith("("):
-            stt_hs = int(hs_chon_raw.split(" - ")[0].replace("#", ""))
-            current_row = df[df["STT"] == stt_hs].iloc[0]
-            diem_delta = DANH_SACH_LOI[loi_chon] * so_lan
-            diem_sau_khi_luu = current_row["Điểm thi đua"] + diem_delta
-            delta_color = "#16a34a" if diem_delta > 0 else "#dc2626"
-            delta_sign = "+" if diem_delta > 0 else ""
-
-            st.markdown(
-                f"""
-                <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: 8px; margin: 8px 0; font-size: 0.88rem;">
-                    Hiện tại: <b>{current_row['Điểm thi đua']}</b> | 
-                    Biến động: <b style="color:{delta_color};">{delta_sign}{diem_delta}</b> | 
-                    Dự kiến: <b>{diem_sau_khi_luu} đ</b>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-        if st.button("💾 Xác Nhận Lưu Điểm", type="primary", use_container_width=True):
-            if danh_sach_hs and not hs_chon_raw.startswith("("):
-                stt_hs = int(hs_chon_raw.split(" - ")[0].replace("#", ""))
-                match_idx = df[df["STT"] == stt_hs].index[0]
-
-                diem_thay_doi = DANH_SACH_LOI[loi_chon] * int(so_lan)
-                old_score = int(df.at[match_idx, "Điểm thi đua"])
-                new_score = old_score + diem_thay_doi
-                xeploai_moi = tinh_xep_loai(new_score)
-
-                noi_dung_ngan = loi_chon.split(" (")[0]
-                log_item = f"{noi_dung_ngan} x{so_lan}" + (f" [{ghi_chu}]" if ghi_chu else "")
-
-                old_log = str(df.at[match_idx, "Lỗi vi phạm"]).strip()
-                if old_log in ["None", "nan", "", "NaN"]:
-                    full_log = log_item
-                else:
-                    full_log = f"{old_log} | {log_item}"
-
-                df.at[match_idx, "Điểm thi đua"] = new_score
-                df.at[match_idx, "Xếp loại"] = xeploai_moi
-                df.at[match_idx, "Lỗi vi phạm"] = full_log
-                df.to_csv(DATA_FILE, index=False)
-                st.session_state.df = df
-
-                if API_URL and "/exec" in API_URL:
-                    update_gsheet(df.at[match_idx, "Họ và tên"], new_score, xeploai_moi, full_log)
-
-                st.toast(f"Đã lưu điểm cho {df.at[match_idx, 'Họ và tên']}!", icon="✅")
-                time.sleep(0.5)
-                st.rerun()
-
-# --- TAB 3: THỐNG KÊ BIỂU ĐỒ MOBILE ---
-elif st.session_state.current_tab == "Thống kê":
-    st.markdown("##### 📊 Thống Kê Tổng Quan")
+# --- MÀN HÌNH 1: THỐNG KÊ ---
+if st.session_state.mobile_tab == "Thống kê":
+    st.markdown("##### 📊 Bảng Thống Kê Lớp 8B3")
 
     total_students = len(df)
     avg_score = round(df["Điểm thi đua"].mean(), 1) if not df.empty else 0
@@ -537,22 +344,22 @@ elif st.session_state.current_tab == "Thống kê":
 
     st.markdown(
         f"""
-        <div class="stat-grid">
-            <div class="stat-card-m">
-                <div class="stat-card-m-title">Sĩ số lớp</div>
-                <div class="stat-card-m-val">{total_students}</div>
+        <div class="stat-grid-m">
+            <div class="stat-box-m">
+                <div class="stat-box-label">Sĩ số lớp</div>
+                <div class="stat-box-val">{total_students}</div>
             </div>
-            <div class="stat-card-m">
-                <div class="stat-card-m-title">Điểm TB Lớp</div>
-                <div class="stat-card-m-val" style="color:#0284c7;">{avg_score}</div>
+            <div class="stat-box-m">
+                <div class="stat-box-label">Điểm TB Lớp</div>
+                <div class="stat-box-val" style="color:#0284c7;">{avg_score}</div>
             </div>
-            <div class="stat-card-m">
-                <div class="stat-card-m-title">Xếp loại Tốt</div>
-                <div class="stat-card-m-val" style="color:#16a34a;">{tot_count}</div>
+            <div class="stat-box-m">
+                <div class="stat-box-label">Xếp loại Tốt</div>
+                <div class="stat-box-val" style="color:#16a34a;">{tot_count}</div>
             </div>
-            <div class="stat-card-m">
-                <div class="stat-card-m-title">Nhắc nhở</div>
-                <div class="stat-card-m-val" style="color:#dc2626;">{yeu_count}</div>
+            <div class="stat-box-m">
+                <div class="stat-box-label">Cần nhắc nhở</div>
+                <div class="stat-box-val" style="color:#dc2626;">{yeu_count}</div>
             </div>
         </div>
         """,
@@ -560,20 +367,20 @@ elif st.session_state.current_tab == "Thống kê":
     )
 
     if "Tổ" in df.columns and not df.empty:
-        st.markdown("###### 🏆 Điểm trung bình 4 Tổ")
+        st.markdown("###### 🏆 Điểm trung bình thi đua 4 Tổ:")
         avg_by_to = df.groupby("Tổ")["Điểm thi đua"].mean().round(1).reset_index()
         avg_by_to = avg_by_to.sort_values(by="Điểm thi đua", ascending=False)
         st.bar_chart(data=avg_by_to.set_index("Tổ"), use_container_width=True)
 
-# --- TAB 4: BÁO CÁO & XUẤT EXCEL ---
-elif st.session_state.current_tab == "Báo cáo":
-    st.markdown("##### 📥 Xuất Báo Cáo Thi Đua")
-    st.caption("File Excel tự động xếp hạng học sinh từ điểm cao nhất xuống thấp nhất.")
+# --- MÀN HÌNH 2: XUẤT FILE TỔNG HỢP ---
+elif st.session_state.mobile_tab == "Xuất file tổng hợp":
+    st.markdown("##### 📥 Xuất Báo Cáo Xếp Hạng Thi Đua")
+    st.caption("Danh sách tự động xếp hạng học sinh đạt điểm cao nhất từ trên xuống dưới.")
 
     def tao_excel_chuyen_nghiep(dataframe):
         wb = openpyxl.Workbook()
         ws = wb.active
-        ws.title = "Báo Cáo Thi Đua"
+        ws.title = "BaoCao8B3"
         ws.views.sheetView[0].showGridLines = True
 
         font_title = Font(name="Calibri", size=15, bold=True, color="0B4F8A")
@@ -590,12 +397,12 @@ elif st.session_state.current_tab == "Báo cáo":
         border_full = Border(left=border_thin, right=border_thin, top=border_thin, bottom=border_thin)
 
         ws.merge_cells("A1:F1")
-        ws["A1"] = "TRƯỜNG THCS CHÍ CÔNG - PHAN RÍ CỬA"
+        ws["A1"] = "TRƯỜNG THCS CHÍ CÔNG - LỚP 8B3 VƯƠN MÌNH THẾ GIỚI"
         ws["A1"].font = font_title
         ws["A1"].alignment = Alignment(horizontal="center", vertical="center")
 
         ws.merge_cells("A2:F2")
-        ws["A2"] = f"BẢNG THỐNG KÊ THI ĐUA LỚP 8B3 (Xuất ngày: {time.strftime('%d/%m/%Y %H:%M')})"
+        ws["A2"] = f"BẢNG TỔNG HỢP XẾP HẠNG THI ĐUA (Xuất ngày: {time.strftime('%d/%m/%Y %H:%M')})"
         ws["A2"].font = font_sub
         ws["A2"].alignment = Alignment(horizontal="center", vertical="center")
 
@@ -689,54 +496,75 @@ elif st.session_state.current_tab == "Báo cáo":
     excel_data = tao_excel_chuyen_nghiep(df)
 
     st.download_button(
-        label="📊 Tải Xuống File Excel Báo Cáo",
+        label="📊 TẢI XUỐNG FILE EXCEL (.XLSX)",
         data=excel_data,
-        file_name=f"Bao_Cao_Thi_Dua_Lop_8B3_{time.strftime('%Y_%m_%d')}.xlsx",
+        file_name=f"Bao_Cao_Thi_Dua_8B3_{time.strftime('%Y_%m_%d')}.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         type="primary",
         use_container_width=True,
     )
 
-    if is_gvcn:
-        st.markdown("<hr style='margin: 20px 0;'>", unsafe_allow_html=True)
-        st.markdown("###### ⚙️ Khởi Tạo Tuần Mới (Reset)")
-        confirm = st.checkbox("Xác nhận đặt lại toàn bộ điểm về 100")
-        if st.button("🔄 Bắt đầu tuần mới", type="primary", use_container_width=True):
-            if confirm:
-                df["Điểm thi đua"] = 100
-                df["Xếp loại"] = "Tốt"
-                df["Lỗi vi phạm"] = ""
-                df.to_csv(DATA_FILE, index=False)
-                st.session_state.df = df
-                if API_URL and "/exec" in API_URL:
-                    reset_new_week_gsheet()
-                st.toast("Đã khởi tạo tuần mới!", icon="🎉")
-                time.sleep(0.5)
-                st.rerun()
+# --- MÀN HÌNH 3: CHỈNH SỬA ĐIỂM CÁC TỔ (CÓ NÚT TĂNG GIẢM [+] [-]) ---
+elif st.session_state.mobile_tab == "Chỉnh sửa điểm các tổ":
+    st.markdown(f"##### ✏️ Chỉnh Sửa & Chấm Điểm ({vai_tro})")
 
-# ==============================================================================
-# 7. THANH BOTTOM NAVIGATION BAR (CỐ ĐỊNH DƯỚI ĐÁY MÀN HÌNH ĐIỆN THOẠI)
-# ==============================================================================
-st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
+    # Chọn học sinh
+    danh_sach_hs = [
+        f"#{row['STT']} - {row['Họ và tên']} ({row['Tổ']})"
+        for _, row in df_role.iterrows()
+    ]
 
-nav_c1, nav_c2, nav_c3, nav_c4 = st.columns(4)
+    selected_student_raw = st.selectbox(
+        "👤 Chọn học sinh cần chấm / sửa điểm:",
+        danh_sach_hs if danh_sach_hs else ["(Không có học sinh trong phân ban này)"],
+    )
 
-with nav_c1:
-    if st.button("📋\nTheo dõi", key="btn_nav_1", use_container_width=True):
-        st.session_state.current_tab = "Theo dõi"
-        st.rerun()
+    if danh_sach_hs and not selected_student_raw.startswith("("):
+        stt_hs = int(selected_student_raw.split(" - ")[0].replace("#", ""))
+        match_idx = df[df["STT"] == stt_hs].index[0]
+        cur_student = df.loc[match_idx]
 
-with nav_c2:
-    if st.button("✍️\nChấm điểm", key="btn_nav_2", use_container_width=True):
-        st.session_state.current_tab = "Chấm điểm"
-        st.rerun()
+        curr_score = int(cur_student["Điểm thi đua"])
+        curr_rank = cur_student["Xếp loại"]
+        score_color = "#16a34a" if curr_score >= 100 else ("#d97706" if curr_score >= 85 else "#dc2626")
 
-with nav_c3:
-    if st.button("📊\nThống kê", key="btn_nav_3", use_container_width=True):
-        st.session_state.current_tab = "Thống kê"
-        st.rerun()
+        # Thẻ thông tin học sinh
+        st.markdown(
+            f"""
+            <div class="student-m-card">
+                <div style="display: flex; align-items: center;">
+                    <div class="student-m-avatar">{cur_student['Họ và tên'].split()[-1][0].upper()}</div>
+                    <div>
+                        <div style="font-weight: 700; color: #1e293b;">{cur_student['Họ và tên']}</div>
+                        <div style="font-size: 0.8rem; color: #64748b;">{cur_student['Tổ']} • STT #{cur_student['STT']}</div>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 1.3rem; font-weight: 800; color: {score_color};">{curr_score} đ</div>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: {score_color};">Xếp loại: {curr_rank}</span>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
-with nav_c4:
-    if st.button("📥\nBáo cáo", key="btn_nav_4", use_container_width=True):
-        st.session_state.current_tab = "Báo cáo"
-        st.rerun()
+        # 2 Tab con: [Ghi Vi Phạm / Thưởng] vs [Sửa Điểm Trực Tiếp]
+        mode_action = st.radio("Thao tác:", ["🎯 Ghi vi phạm / Thưởng", "🛠️ Sửa điểm trực tiếp"], horizontal=True, label_visibility="collapsed")
+
+        # KHỐI 1: GHI NHẬN CÓ BỘ NÚT TĂNG GIẢM [+] [-] SỐ LẦN
+        if mode_action == "🎯 Ghi vi phạm / Thưởng":
+            with st.container(border=True):
+                loi_chon = st.selectbox("Nội dung:", list(DANH_SACH_LOI.keys()))
+                
+                # Cụm nút TĂNG GIẢM SỐ LẦN BẰNG NÚT BẤM [+] [-]
+                st.markdown("<div style='text-align: center; font-weight: 700; font-size: 0.9rem;'>Số lần vi phạm / Tuyên dương:</div>", unsafe_allow_html=True)
+                step_c1, step_c2, step_c3 = st.columns([1, 1, 1])
+                with step_c1:
+                    if st.button("➖ Giảm", use_container_width=True):
+                        if st.session_state.record_times > 1:
+                            st.session_state.record_times -= 1
+                            st.rerun()
+                with step_c2:
+                    st.markdown(f"<div style='text-align: center; font-size: 1.4rem; font-weight: 800; padding: 4px;'>{st.session_state.record_times}</div>", unsafe_allow_html=True)
+                with step_c3:
+                    if st.button("➕ Tăng", use_container_width=True):
