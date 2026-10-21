@@ -568,3 +568,4 @@ elif st.session_state.mobile_tab == "Chỉnh sửa điểm các tổ":
                     st.markdown(f"<div style='text-align: center; font-size: 1.4rem; font-weight: 800; padding: 4px;'>{st.session_state.record_times}</div>", unsafe_allow_html=True)
                 with step_c3:
                     if st.button("➕ Tăng", use_container_width=True):
+
