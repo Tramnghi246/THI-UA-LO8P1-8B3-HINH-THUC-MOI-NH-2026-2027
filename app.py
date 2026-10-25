@@ -649,3 +649,4 @@ elif st.session_state.mobile_tab == "Chỉnh sửa điểm các tổ":
                     st.toast(f"Đã đặt lại điểm cho {cur_student['Họ và tên']} thành {direct_score}đ!", icon="✅")
                     time.sleep(0.5)
                     st.rerun()
+
