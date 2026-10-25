@@ -18,7 +18,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-API_URL = "https://script.google.com/macros/s/AKfycbwoy6GT8XEkwwrLTSXrIk3tMj6lzATeiwrw02cWYz7yEXDhzEtDOoyL8VssgXuJE08q/exec"
+API_URL = "https://script.google.com/macros/s/AKfycbwGycpYUHSNWnhLzxmTN2pf1G8vfX9AsuM8xmDQ3DXVkLTSqz9gifMHxKVuUJWsEEA3/exec"
 DATA_FILE = "du_lieu_thi_dua.csv"
 
 # ==============================================================================
