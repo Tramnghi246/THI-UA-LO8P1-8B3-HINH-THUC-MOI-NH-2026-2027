@@ -9,10 +9,10 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
 # ==============================================================================
-# 1. CẤU HÌNH TRANG MOBILE GỌN GÀNG (KHÔNG SIDEBAR, BẤM LÀ CHẠY NGAY)
+# 1. CẤU HÌNH TRANG MOBILE GỌN GÀNG (KHÔNG SIDEBAR)
 # ==============================================================================
 st.set_page_config(
-    page_title="Lớp 8B3 nâng Bước Tương Lai - Tự Tin Sáng Tạo",
+    page_title="Lớp 8B3 Vươn Mình Thế Giới - Tự Tin Sáng Tạo",
     page_icon="🌟",
     layout="centered",
     initial_sidebar_state="collapsed",
@@ -133,7 +133,7 @@ st.markdown(
 )
 
 # ==============================================================================
-# 3. DANH MỤC THI ĐUA & DỮ LIỆU KHỞI TẠO
+# 3. DANH MỤC THI ĐUA & DỮ LIỆU KHỞI TẠO (44 HỌC SINH LỚP 8B3)
 # ==============================================================================
 DANH_SACH_LOI = {
     "🌸 Thầy cô tuyên dương (+2)": 2,
@@ -153,31 +153,50 @@ DANH_SACH_LOI = {
 }
 
 DEFAULT_STUDENTS = [
-    {"STT": 1, "Họ và tên": "Huỳnh Bảo Ngọc Thiên Ân", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 2, "Họ và tên": "Lê Minh Thái Dương", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 3, "Họ và tên": "Ngô Gia Hân", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 4, "Họ và tên": "Phạm Hoàng Đăng Khôi", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 5, "Họ và tên": "Trần Thị Cẩm Ly", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 6, "Họ và tên": "Vũ Đức Trọng", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 7, "Họ và tên": "Nguyễn Tuyền An", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 8, "Họ và tên": "Nguyễn Thị Ngọc Hiên", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 9, "Họ và tên": "Huỳnh Ngọc Huy", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 10, "Họ và tên": "Nguyễn Huỳnh Gia Hưng", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 11, "Họ và tên": "Trần Quốc Bảo", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 12, "Họ và tên": "Nguyễn Minh Khang", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 13, "Họ và tên": "Bùi Thị Tuyết Mai", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 14, "Họ và tên": "Lê Tuấn Hưng", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 15, "Họ và tên": "Lê Quỳnh Diễm Hương", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 16, "Họ và tên": "Nguyễn Lê Hoàng Mai", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 17, "Họ và tên": "Đỗ Hoàng Nam", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 18, "Họ và tên": "Võ Thị Yến Nhi", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 19, "Họ và tên": "Phan Thanh Phong", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 20, "Họ và tên": "Võ Huỳnh Minh An", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 21, "Họ và tên": "Lê Văn Tuấn", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 22, "Họ và tên": "Đặng Ngọc Như Quỳnh", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 23, "Họ và tên": "Nguyễn Tấn Tài", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 24, "Họ và tên": "Lê Thị Thảo Trang", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 25, "Họ và tên": "Nguyễn Hoàng Việt", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""}
+    {"STT": 1, "Họ và tên": "Nguyễn Tuyền An", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 2, "Họ và tên": "Võ Huỳnh Minh An", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 3, "Họ và tên": "Huỳnh Bảo Ngọc Thiên Ân", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 4, "Họ và tên": "Lê Minh Thái Dương", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 5, "Họ và tên": "Ngô Gia Hân", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 6, "Họ và tên": "Nguyễn Thị Ngọc Hiên", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 7, "Họ và tên": "Huỳnh Ngọc Huy", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 8, "Họ và tên": "Lê Tuấn Hưng", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 9, "Họ và tên": "Nguyễn Huỳnh Gia Hưng", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 10, "Họ và tên": "Lê Quỳnh Diễm Hương", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 11, "Họ và tên": "Trần Thanh Thiên Hương", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 12, "Họ và tên": "Bùi Nhật Khiêm", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 13, "Họ và tên": "Nguyễn Trung Kiên", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 14, "Họ và tên": "Lê Ngọc Ánh Loan", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 15, "Họ và tên": "Nguyễn Quý Khởi My", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 16, "Họ và tên": "Nguyễn Trần Xuân Nghi", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 17, "Họ và tên": "Trần Khánh Ngọc", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 18, "Họ và tên": "Võ Như Nguyệt", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 19, "Họ và tên": "Nguyễn Huỳnh Mai Nhi", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 20, "Họ và tên": "Phạm Thị Thu Nhung", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 21, "Họ và tên": "Nhữ Quỳnh Như", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 22, "Họ và tên": "Võ Phi Uyển Như", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 23, "Họ và tên": "Ngô Minh Phong", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 24, "Họ và tên": "Nguyễn Thiên Phú", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 25, "Họ và tên": "Nguyễn Thiện Phúc", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 26, "Họ và tên": "Nguyễn Lục Trung Quân", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 27, "Họ và tên": "Nguyễn Gia Ngọc Quý", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 28, "Họ và tên": "Nguyễn Tấn Tài", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 29, "Họ và tên": "Lê Ngọc Thái", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 30, "Họ và tên": "Trần Ngọc Thanh", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 31, "Họ và tên": "Đỗ Nguyễn Xuân Thiên", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 32, "Họ và tên": "Nguyễn Duy Thiên", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 33, "Họ và tên": "Võ Anh Thiên", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 34, "Họ và tên": "Nguyễn Đức Thịnh", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 35, "Họ và tên": "Nguyễn Thanh Thủy", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 36, "Họ và tên": "Nguyễn Minh Thư", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 37, "Họ và tên": "Hồ Mai Xuân Trâm", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 38, "Họ và tên": "Nhữ Trường Huyền Trân", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 39, "Họ và tên": "Hồ Ngọc Minh Triết", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 40, "Họ và tên": "Nhữ Trường Nhã Trúc", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 41, "Họ và tên": "Trần Ngọc Bích Tuyền", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 42, "Họ và tên": "Trần Thanh Tuyền", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 43, "Họ và tên": "Nguyễn Ngọc Gia Tường", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 44, "Họ và tên": "Nhữ Trường Gia Tường", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""}
 ]
 
 # ==============================================================================
@@ -245,6 +264,11 @@ def load_data():
                     df_temp = clean_dataframe(df_temp)
                     df_temp.to_csv(DATA_FILE, index=False)
                     return df_temp
+                elif isinstance(data, dict) and "data" in data:
+                    df_temp = pd.DataFrame(data["data"])
+                    df_temp = clean_dataframe(df_temp)
+                    df_temp.to_csv(DATA_FILE, index=False)
+                    return df_temp
         except Exception:
             pass
 
@@ -277,11 +301,9 @@ if "df" not in st.session_state:
 
 df = st.session_state.df
 
-# Khởi tạo tab hiện tại: mặc định là "Chỉnh sửa điểm các tổ"
 if "mobile_tab" not in st.session_state:
     st.session_state.mobile_tab = "Chỉnh sửa điểm các tổ"
 
-# Số lần vi phạm/thưởng mặc định trong phiên
 if "record_times" not in st.session_state:
     st.session_state.record_times = 1
 
@@ -297,6 +319,21 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+# Thanh chuyển tab chính trên điện thoại
+tab_c1, tab_c2, tab_c3 = st.columns(3)
+with tab_c1:
+    if st.button("✏️ Chấm điểm", use_container_width=True, type="primary" if st.session_state.mobile_tab == "Chỉnh sửa điểm các tổ" else "secondary"):
+        st.session_state.mobile_tab = "Chỉnh sửa điểm các tổ"
+        st.rerun()
+with tab_c2:
+    if st.button("📊 Thống kê", use_container_width=True, type="primary" if st.session_state.mobile_tab == "Thống kê" else "secondary"):
+        st.session_state.mobile_tab = "Thống kê"
+        st.rerun()
+with tab_c3:
+    if st.button("📥 Xuất Excel", use_container_width=True, type="primary" if st.session_state.mobile_tab == "Xuất file tổng hợp" else "secondary"):
+        st.session_state.mobile_tab = "Xuất file tổng hợp"
+        st.rerun()
 
 # Thanh chọn vai trò nhanh & nút làm mới
 role_c1, role_c2 = st.columns([2, 1])
@@ -330,7 +367,7 @@ else:
 st.markdown("<hr style='margin: 8px 0 14px 0; border: none; border-top: 1px solid #e2e8f0;'>", unsafe_allow_html=True)
 
 # ==============================================================================
-# 6. NỘI DUNG 3 TÍNH NĂNG CHÍNH DƯỚI ĐÁY
+# 6. NỘI DUNG 3 TÍNH NĂNG CHÍNH
 # ==============================================================================
 
 # --- MÀN HÌNH 1: THỐNG KÊ ---
@@ -504,11 +541,10 @@ elif st.session_state.mobile_tab == "Xuất file tổng hợp":
         use_container_width=True,
     )
 
-# --- MÀN HÌNH 3: CHỈNH SỬA ĐIỂM CÁC TỔ (CÓ NÚT TĂNG GIẢM [+] [-]) ---
+# --- MÀN HÌNH 3: CHỈNH SỬA ĐIỂM CÁC TỔ ---
 elif st.session_state.mobile_tab == "Chỉnh sửa điểm các tổ":
     st.markdown(f"##### ✏️ Chỉnh Sửa & Chấm Điểm ({vai_tro})")
 
-    # Chọn học sinh
     danh_sach_hs = [
         f"#{row['STT']} - {row['Họ và tên']} ({row['Tổ']})"
         for _, row in df_role.iterrows()
@@ -528,7 +564,6 @@ elif st.session_state.mobile_tab == "Chỉnh sửa điểm các tổ":
         curr_rank = cur_student["Xếp loại"]
         score_color = "#16a34a" if curr_score >= 100 else ("#d97706" if curr_score >= 85 else "#dc2626")
 
-        # Thẻ thông tin học sinh
         st.markdown(
             f"""
             <div class="student-m-card">
@@ -548,15 +583,13 @@ elif st.session_state.mobile_tab == "Chỉnh sửa điểm các tổ":
             unsafe_allow_html=True,
         )
 
-        # 2 Tab con: [Ghi Vi Phạm / Thưởng] vs [Sửa Điểm Trực Tiếp]
         mode_action = st.radio("Thao tác:", ["🎯 Ghi vi phạm / Thưởng", "🛠️ Sửa điểm trực tiếp"], horizontal=True, label_visibility="collapsed")
 
-        # KHỐI 1: GHI NHẬN CÓ BỘ NÚT TĂNG GIẢM [+] [-] SỐ LẦN
+        # KHỐI 1: GHI NHẬN VI PHẠM / TUYÊN DƯƠNG
         if mode_action == "🎯 Ghi vi phạm / Thưởng":
             with st.container(border=True):
                 loi_chon = st.selectbox("Nội dung:", list(DANH_SACH_LOI.keys()))
                 
-                # Cụm nút TĂNG GIẢM SỐ LẦN BẰNG NÚT BẤM [+] [-]
                 st.markdown("<div style='text-align: center; font-weight: 700; font-size: 0.9rem;'>Số lần vi phạm / Tuyên dương:</div>", unsafe_allow_html=True)
                 step_c1, step_c2, step_c3 = st.columns([1, 1, 1])
                 with step_c1:
@@ -568,3 +601,51 @@ elif st.session_state.mobile_tab == "Chỉnh sửa điểm các tổ":
                     st.markdown(f"<div style='text-align: center; font-size: 1.4rem; font-weight: 800; padding: 4px;'>{st.session_state.record_times}</div>", unsafe_allow_html=True)
                 with step_c3:
                     if st.button("➕ Tăng", use_container_width=True):
+                        st.session_state.record_times += 1
+                        st.rerun()
+
+                delta_per_time = DANH_SACH_LOI[loi_chon]
+                total_delta = delta_per_time * st.session_state.record_times
+                delta_str = f"+{total_delta}" if total_delta > 0 else f"{total_delta}"
+
+                st.caption(f"💡 Dự kiến: **{delta_str} điểm** vào tổng điểm.")
+
+                if st.button("💾 Xác Nhận Lưu", type="primary", use_container_width=True):
+                    new_score = curr_score + total_delta
+                    new_rank = tinh_xep_loai(new_score)
+                    entry_text = f"{loi_chon.split(' (')[0]} (x{st.session_state.record_times})"
+                    
+                    old_vi_pham = str(cur_student.get("Lỗi vi phạm", "")).strip()
+                    if old_vi_pham and old_vi_pham not in ["nan", "None"]:
+                        updated_vi_pham = f"{old_vi_pham} | {entry_text}"
+                    else:
+                        updated_vi_pham = entry_text
+
+                    df.loc[match_idx, "Điểm thi đua"] = new_score
+                    df.loc[match_idx, "Xếp loại"] = new_rank
+                    df.loc[match_idx, "Lỗi vi phạm"] = updated_vi_pham
+
+                    df.to_csv(DATA_FILE, index=False)
+                    update_gsheet(cur_student["Họ và tên"], new_score, new_rank, updated_vi_pham)
+                    st.session_state.record_times = 1
+                    st.toast(f"Đã cập nhật cho {cur_student['Họ và tên']} ({delta_str} đ)!", icon="✅")
+                    time.sleep(0.5)
+                    st.rerun()
+
+        # KHỐI 2: SỬA ĐIỂM TRỰC TIẾP
+        else:
+            with st.container(border=True):
+                direct_score = st.number_input("Nhập số điểm mong muốn:", value=curr_score, step=1)
+                direct_note = st.text_area("Ghi chú vi phạm / tuyên dương:", value=str(cur_student.get("Lỗi vi phạm", "")).replace("nan", ""))
+
+                if st.button("💾 Lưu Điểm Này", type="primary", use_container_width=True):
+                    new_rank = tinh_xep_loai(direct_score)
+                    df.loc[match_idx, "Điểm thi đua"] = int(direct_score)
+                    df.loc[match_idx, "Xếp loại"] = new_rank
+                    df.loc[match_idx, "Lỗi vi phạm"] = direct_note.strip()
+
+                    df.to_csv(DATA_FILE, index=False)
+                    update_gsheet(cur_student["Họ và tên"], int(direct_score), new_rank, direct_note.strip())
+                    st.toast(f"Đã đặt lại điểm cho {cur_student['Họ và tên']} thành {direct_score}đ!", icon="✅")
+                    time.sleep(0.5)
+                    st.rerun()
