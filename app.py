@@ -12,7 +12,7 @@ from openpyxl.utils import get_column_letter
 # 1. CẤU HÌNH TRANG MOBILE GỌN GÀNG (KHÔNG SIDEBAR)
 # ==============================================================================
 st.set_page_config(
-    page_title="Lớp 8B3 Vươn Mình Thế Giới - Tự Tin Sáng Tạo",
+    page_title="Lớp 8B3 Nâng Bước Tương lai - Tự Tin Sáng Tạo",
     page_icon="🌟",
     layout="centered",
     initial_sidebar_state="collapsed",
