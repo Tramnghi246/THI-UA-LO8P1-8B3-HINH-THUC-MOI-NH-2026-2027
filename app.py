@@ -150,6 +150,8 @@ DANH_SACH_LOI = {
     "🧹 Không trực nhật / vệ sinh (-5)": -5,
     "📱 Sử dụng điện thoại không xin phép (-15)": -15,
     "🚨 Nghỉ học không phép (-5)": -5,
+     "🚨 Vi phạm an toàn giao thông (-10)": -10,
+     "📱 Vi phạm khác (-2)": -2,
 }
 
 DEFAULT_STUDENTS = [
@@ -158,7 +160,7 @@ DEFAULT_STUDENTS = [
     {"STT": 3, "Họ và tên": "Huỳnh Bảo Ngọc Thiên Ân", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
     {"STT": 4, "Họ và tên": "Lê Minh Thái Dương", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
     {"STT": 5, "Họ và tên": "Ngô Gia Hân", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 6, "Họ và tên": "Nguyễn Thị Ngọc Hiên", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 6, "Họ và tên": "Nguyễn Thị Ngọc Hiên", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
     {"STT": 7, "Họ và tên": "Huỳnh Ngọc Huy", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
     {"STT": 8, "Họ và tên": "Lê Tuấn Hưng", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
     {"STT": 9, "Họ và tên": "Nguyễn Huỳnh Gia Hưng", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
@@ -166,7 +168,7 @@ DEFAULT_STUDENTS = [
     {"STT": 11, "Họ và tên": "Trần Thanh Thiên Hương", "Tổ": "Tổ 4", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
     {"STT": 12, "Họ và tên": "Bùi Nhật Khiêm", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
     {"STT": 13, "Họ và tên": "Nguyễn Trung Kiên", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
-    {"STT": 14, "Họ và tên": "Lê Ngọc Ánh Loan", "Tổ": "Tổ 1", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
+    {"STT": 14, "Họ và tên": "Lê Ngọc Ánh Loan", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
     {"STT": 15, "Họ và tên": "Nguyễn Quý Khởi My", "Tổ": "Tổ 3", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
     {"STT": 16, "Họ và tên": "Nguyễn Trần Xuân Nghi", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
     {"STT": 17, "Họ và tên": "Trần Khánh Ngọc", "Tổ": "Tổ 2", "Điểm thi đua": 100, "Xếp loại": "Tốt", "Lỗi vi phạm": ""},
