@@ -652,3 +652,5 @@ elif st.session_state.mobile_tab == "Chỉnh sửa điểm các tổ":
                     time.sleep(0.5)
                     st.rerun()
 
+
+
