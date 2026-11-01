@@ -150,8 +150,8 @@ DANH_SACH_LOI = {
     "🧹 Không trực nhật / vệ sinh (-5)": -5,
     "📱 Sử dụng điện thoại không xin phép (-15)": -15,
     "🚨 Nghỉ học không phép (-5)": -5,
-     "🚨 Vi phạm an toàn giao thông (-10)": -10,
-     "📱 Vi phạm khác (-2)": -2,
+    "🚨 Vi phạm an toàn giao thông (-10)": -10,
+    "📱 Vi phạm khác (-2)": -2,
 }
 
 DEFAULT_STUDENTS = [
